@@ -1,0 +1,9 @@
+-cp src
+# -D analyzer-optimize
+# -D fdb
+-main Main
+# --interp
+# -as3 bin\src
+# -D advanced-telemetry
+-swf-header 600:800:60:ffffff
+-swf bin/application.swf
