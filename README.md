@@ -1,9 +1,10 @@
-# Haxe project
+# Impulse Engine
+Created by Randy Gaul
 
-This is an example Haxe project scaffolded by Visual Studio Code.
+Impulse Engine is a small 2D physics engine written in C++ (https://github.com/RandyGaul/ImpulseEngine). 
 
-Without further changes the structure is following:
+https://github.com/ClickerMonkey/ImpulseEngine
+  The engine is intended to be used in an educational manner by other looking to learn the inner workings of physics engines, but you can use in serer-side and pure-logic projects.
 
- * `src/Main.hx`: Entry point Haxe source file
- * `build.hxml`: Haxe command line file used to build the project
- * `README.md`: This file
+
+Main class is demo of haxe-as3 language. based on your needs build to cpp, java, js, cs, php and other haxe support languages.
