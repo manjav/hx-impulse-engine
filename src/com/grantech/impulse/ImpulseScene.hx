@@ -145,8 +145,8 @@ class ImpulseScene {
 		integrateForces(b, dt);
 	}
 
-	var man_pool:Array<Manifold> = new Array();
-	var man_i:Int = 0;
+	private var man_pool:Array<Manifold> = new Array();
+	private var man_i:Int = 0;
 
 	public function man_ds(m:Manifold):Void {
 		man_pool[man_i++] = m;
@@ -162,8 +162,8 @@ class ImpulseScene {
 		return new Manifold(a, b, this);
 	}
 
-	var vec_pool:Array<Vec2> = new Array<Vec2>();
-	var vec_i:Int = 0;
+	private var vec_pool:Array<Vec2> = new Array<Vec2>();
+	private var vec_i:Int = 0;
 
 	public function vec_ds(v:Vec2):Void {
 		vec_pool[vec_i++] = v;
@@ -175,8 +175,8 @@ class ImpulseScene {
 		return new Vec2();
 	}
 
-	var mat_pool:Array<Mat2> = new Array();
-	var mat_i:Int = 0;
+	private var mat_pool:Array<Mat2> = new Array();
+	private var mat_i:Int = 0;
 
 	public function mat_ds(m:Mat2):Void {
 		mat_pool[mat_i++] = m;
