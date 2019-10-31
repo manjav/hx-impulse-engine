@@ -21,34 +21,30 @@
 	Port to Haxe and added pooling by Mansour Djawadi http://github.com/manjav
  */
 
-package org.magnos.impulse;
+package com.grantech.impulse;
 
-class CollisionCallback {
-	var manifold:Manifold;
-	var normal:Vec2;
-	var distance:Float;
-	var radiuses:Float;
+class Shape {
+	static public var TYPE_CIRCLE:Int = 0;
+	static public var TYPE_POLY:Int = 1;
+	static public var TYPE_COUNT:Int = 2;
+
+	public var body:Body;
+	public var radius:Float = 0;
+	public var u:Mat2 = new Mat2();
 
 	public function new() {}
 
-	public function handleCollision(m:Manifold, a:Body, b:Body):Bool {
-		this.manifold = m;
+	public function initialize():Void {}
 
-		// Calculate translational vector, which is normal
-		// normal:Vec = b->position - a->position;
-		normal = b.position.sub(a.position, m.scene.vec_in());
+	public function computeMass(density:Float):Void {}
 
-		// real dist_sqr = normal.LenSqr( );
-		// real radius = A->radius + B->radius;
-		distance = normal.length();
-		radiuses = a.shape.radius + b.shape.radius;
+	public function setOrient(radians:Float):Void {}
 
-		// is far
-		if (distance > radiuses) {
-			m.contactCount = 0;
-			m.scene.vec_ds(normal);
-			return false;
-		}
-		return true;
+	public function getType():Int {
+		return 0;
+	}
+
+	public function clone():Shape {
+		return null;
 	}
 }

@@ -21,7 +21,7 @@
 	Port to Haxe and added pooling by Mansour Djawadi http://github.com/manjav
  */
 
-package org.magnos.impulse;
+package com.grantech.impulse;
 
 class Polygon extends Shape {
 	static public var MAX_POLY_VERTEX_COUNT:Int = 64;
@@ -32,7 +32,7 @@ class Polygon extends Shape {
 
 	public function new(verts:Array<Vec2> = null) {
 		super();
-		if( verts != null)
+		if (verts != null)
 			set(verts);
 	}
 
@@ -62,14 +62,13 @@ class Polygon extends Shape {
 		computeMass(1.0);
 	}
 
-/* 	public function draw()
-	{
-		this.graphics.lineStyle(1);
-		this.graphics.moveTo(0,0);
-		for(i in 0...vertices.length)
-			this.graphics.lineTo(vertices[i].x, vertices[i].y);
-	} */
-	
+	/* 	public function draw()
+		{
+			this.graphics.lineStyle(1);
+			this.graphics.moveTo(0,0);
+			for(i in 0...vertices.length)
+				this.graphics.lineTo(vertices[i].x, vertices[i].y);
+	}*/
 	override public function computeMass(density:Float):Void {
 		// Calculate centroid and moment of inertia
 		var c = new Vec2(0.0, 0.0); // centroid
@@ -160,7 +159,7 @@ class Polygon extends Shape {
 				}
 			}
 		}
-		radius = Math.sqrt( dx * dx + dy * dy );
+		radius = Math.sqrt(dx * dx + dy * dy);
 		// trace(radius, dx, dy);
 		var hull = new Array<Int>(); // MAX_POLY_VERTEX_COUNT
 		var outCount:Int = 0;

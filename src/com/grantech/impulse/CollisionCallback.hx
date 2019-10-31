@@ -21,32 +21,34 @@
 	Port to Haxe and added pooling by Mansour Djawadi http://github.com/manjav
  */
 
-package org.magnos.impulse;
+package com.grantech.impulse;
 
-class Circle extends Shape {
-	public function new(r:Float) {
-		super();
-		radius = r;
-	}
+class CollisionCallback {
+	var manifold:Manifold;
+	var normal:Vec2;
+	var distance:Float;
+	var radiuses:Float;
 
-	override public function clone():Shape {
-		return new Circle(radius);
-	}
+	public function new() {}
 
-	override public function initialize() {
-		computeMass(1.0);
-	}
+	public function handleCollision(m:Manifold, a:Body, b:Body):Bool {
+		this.manifold = m;
 
-	override public function computeMass(density:Float) {
-		body.mass = ImpulseMath.PI * radius * radius * density;
-		body.invMass = (body.mass != 0.0) ? 1.0 / body.mass : 0.0;
-		body.inertia = body.mass * radius * radius;
-		body.invInertia = (body.inertia != 0.0) ? 1.0 / body.inertia : 0.0;
-	}
+		// Calculate translational vector, which is normal
+		// normal:Vec = b->position - a->position;
+		normal = b.position.sub(a.position, m.scene.vec_in());
 
-	override public function setOrient(radians:Float) {}
+		// real dist_sqr = normal.LenSqr( );
+		// real radius = A->radius + B->radius;
+		distance = normal.length();
+		radiuses = a.shape.radius + b.shape.radius;
 
-	override public function getType():Int {
-		return Shape.TYPE_CIRCLE;
+		// is far
+		if (distance > radiuses) {
+			m.contactCount = 0;
+			m.scene.vec_ds(normal);
+			return false;
+		}
+		return true;
 	}
 }

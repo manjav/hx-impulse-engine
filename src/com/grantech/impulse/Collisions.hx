@@ -21,30 +21,11 @@
 	Port to Haxe and added pooling by Mansour Djawadi http://github.com/manjav
  */
 
-package org.magnos.impulse;
+package com.grantech.impulse;
 
-class Shape {
-	static public var TYPE_CIRCLE:Int = 0;
-	static public var TYPE_POLY:Int = 1;
-	static public var TYPE_COUNT:Int = 2;
-
-	public var body:Body;
-	public var radius:Float = 0;
-	public var u:Mat2 = new Mat2();
-
-	public function new() {}
-
-	public function initialize():Void {}
-
-	public function computeMass(density:Float):Void {}
-
-	public function setOrient(radians:Float):Void {}
-
-	public function getType():Int {
-		return 0;
-	}
-
-	public function clone():Shape {
-		return null;
-	}
+class Collisions {
+	static public var dispatch:Array<Array<CollisionCallback>> = [
+		[CollisionCircleCircle.instance, CollisionCirclePolygon.instance],
+		[CollisionPolygonCircle.instance, CollisionPolygonPolygon.instance]
+	];
 }

@@ -21,7 +21,7 @@
 	Port to Haxe and added pooling by Mansour Djawadi http://github.com/manjav
  */
 
-package org.magnos.impulse;
+package com.grantech.impulse;
 
 class CollisionPolygonCircle extends CollisionCallback {
 	static public var instance:CollisionPolygonCircle = new CollisionPolygonCircle();

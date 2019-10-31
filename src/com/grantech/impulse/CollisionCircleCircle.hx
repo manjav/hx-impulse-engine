@@ -21,7 +21,7 @@
 	Port to Haxe and added pooling by Mansour Djawadi http://github.com/manjav
  */
 
-package org.magnos.impulse;
+package com.grantech.impulse;
 
 class CollisionCircleCircle extends CollisionCallback {
 	public function new() {
@@ -29,6 +29,7 @@ class CollisionCircleCircle extends CollisionCallback {
 	}
 
 	static public var instance:CollisionCircleCircle = new CollisionCircleCircle();
+
 	override public function handleCollision(m:Manifold, a:Body, b:Body):Bool {
 		if (!super.handleCollision(m, a, b))
 			return false;
@@ -49,7 +50,7 @@ class CollisionCircleCircle extends CollisionCallback {
 			// m->contacts[0] = m->normal * A->radius + a->position;
 			m.penetration = radiuses - distance;
 			m.normal.set(normal.x, normal.y).diviF(distance);
-			
+
 			m.contacts[0].set(m.normal.x, m.normal.y).muliF(a.shape.radius).addi(a.position);
 			m.scene.vec_ds(normal);
 		}

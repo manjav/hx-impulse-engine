@@ -1,7 +1,7 @@
--cp src
+-cp tests
 # -D analyzer-optimize
 # -D fdb
--main Main
+-main TestSimple
 # --interp
 # -as3 bin\src
 # -D advanced-telemetry

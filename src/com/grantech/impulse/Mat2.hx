@@ -21,28 +21,25 @@
 	Port to Haxe and added pooling by Mansour Djawadi http://github.com/manjav
  */
 
-package org.magnos.impulse;
+package com.grantech.impulse;
 
-class Mat2
-{
+class Mat2 {
 	public var m00:Float = 0;
 	public var m01:Float = 0;
 	public var m10:Float = 0;
 	public var m11:Float = 0;
 
-	public function new( radians:Float = 0 )
-	{
+	public function new(radians:Float = 0) {
 		if (radians != 0)
-			setF( radians );
+			setF(radians);
 	}
 
 	/**
 	 * Sets this matrix to a rotation matrix with the given radians.
 	 */
-	public function setF( radians:Float )
-	{
-		var c:Float = Math.cos( radians );
-		var s:Float = Math.sin( radians );
+	public function setF(radians:Float) {
+		var c:Float = Math.cos(radians);
+		var s:Float = Math.sin(radians);
 
 		m00 = c;
 		m01 = -s;
@@ -53,8 +50,7 @@ class Mat2
 	/**
 	 * Sets the values of this matrix.
 	 */
-	public function set( a:Float, b:Float, c:Float, d:Float ):Mat2
-	{
+	public function set(a:Float, b:Float, c:Float, d:Float):Mat2 {
 		m00 = a;
 		m01 = b;
 		m10 = c;
@@ -65,8 +61,7 @@ class Mat2
 	/**
 	 * Sets this matrix to have the same values as the given matrix.
 	 */
-	public function setM( m:Mat2 )
-	{
+	public function setM(m:Mat2) {
 		m00 = m.m00;
 		m01 = m.m01;
 		m10 = m.m10;
@@ -76,31 +71,28 @@ class Mat2
 	/**
 	 * Sets the values of this matrix to their absolute value.
 	 */
-	public function absi()
-	{
-		abs( this );
+	public function absi() {
+		abs(this);
 	}
 
 	/**
 	 * Sets out to the absolute value of this matrix.
 	 */
-	public function abs( out:Mat2 = null ):Mat2
-	{
-		if( out == null )
+	public function abs(out:Mat2 = null):Mat2 {
+		if (out == null)
 			out = new Mat2();
-		out.m00 = Math.abs( m00 );
-		out.m01 = Math.abs( m01 );
-		out.m10 = Math.abs( m10 );
-		out.m11 = Math.abs( m11 );
+		out.m00 = Math.abs(m00);
+		out.m01 = Math.abs(m01);
+		out.m10 = Math.abs(m10);
+		out.m11 = Math.abs(m11);
 		return out;
 	}
 
 	/**
 	 * Sets out to the x-axis (1st column) of this matrix.
 	 */
-	public function getAxisX( out:Vec2 = null ):Vec2
-	{
-		if( out == null )
+	public function getAxisX(out:Vec2 = null):Vec2 {
+		if (out == null)
 			out = new Vec2();
 		out.x = m00;
 		out.y = m10;
@@ -110,9 +102,8 @@ class Mat2
 	/**
 	 * Sets out to the y-axis (2nd column) of this matrix.
 	 */
-	public function getAxisY( out:Vec2 = null ):Vec2
-	{
-		if( out == null )
+	public function getAxisY(out:Vec2 = null):Vec2 {
+		if (out == null)
 			out = new Vec2();
 		out.x = m01;
 		out.y = m11;
@@ -122,8 +113,7 @@ class Mat2
 	/**
 	 * Sets the matrix to it's transpose.
 	 */
-	public function transposei():Void
-	{
+	public function transposei():Void {
 		var t:Float = m01;
 		m01 = m10;
 		m10 = t;
@@ -132,9 +122,8 @@ class Mat2
 	/**
 	 * Sets out to the transpose of this matrix.
 	 */
-	public function transpose( out:Mat2 = null ):Mat2
-	{
-		if( out == null )
+	public function transpose(out:Mat2 = null):Mat2 {
+		if (out == null)
 			out = new Mat2();
 		out.m00 = m00;
 		out.m01 = m10;
@@ -142,29 +131,27 @@ class Mat2
 		out.m11 = m11;
 		return out;
 	}
+
 	/**
 	 * Transforms v by this matrix.
 	 */
-	public function muli( v:Vec2 ):Vec2
-	{
-		return mulFF( v.x, v.y, v );
+	public function muli(v:Vec2):Vec2 {
+		return mulFF(v.x, v.y, v);
 	}
 
 	/**
 	 * Sets out to the transformation of v by this matrix.
 	 */
-	public function mul( v:Vec2, out:Vec2 = null ):Vec2
-	{
-		if( out == null )
+	public function mul(v:Vec2, out:Vec2 = null):Vec2 {
+		if (out == null)
 			out = new Vec2();
-		return mulFF( v.x, v.y, out );
+		return mulFF(v.x, v.y, out);
 	}
 
 	/**
 	 * Sets out the to transformation of {x,y} by this matrix.
 	 */
-	public function mulFF( x:Float, y:Float, out:Vec2 ):Vec2
-	{
+	public function mulFF(x:Float, y:Float, out:Vec2):Vec2 {
 		out.x = m00 * x + m01 * y;
 		out.y = m10 * x + m11 * y;
 		return out;
@@ -173,20 +160,14 @@ class Mat2
 	/**
 	 * Multiplies this matrix by x.
 	 */
-	public function muliM( x:Mat2 ):Void
-	{
-		set(
-			m00 * x.m00 + m01 * x.m10,
-			m00 * x.m01 + m01 * x.m11,
-			m10 * x.m00 + m11 * x.m10,
-			m10 * x.m01 + m11 * x.m11 );
+	public function muliM(x:Mat2):Void {
+		set(m00 * x.m00 + m01 * x.m10, m00 * x.m01 + m01 * x.m11, m10 * x.m00 + m11 * x.m10, m10 * x.m01 + m11 * x.m11);
 	}
 
 	/**
 	 * Sets out to the multiplication of this matrix and x.
 	 */
-	public function mulMM( x:Mat2, out:Mat2 = null ):Mat2
-	{
+	public function mulMM(x:Mat2, out:Mat2 = null):Mat2 {
 		if (out == null)
 			out = new Mat2();
 		out.m00 = m00 * x.m00 + m01 * x.m10;

@@ -21,7 +21,7 @@
 	Port to Haxe and added pooling by Mansour Djawadi http://github.com/manjav
  */
 
-package org.magnos.impulse;
+package com.grantech.impulse;
 
 class Manifold {
 	public var A:Body;
@@ -135,7 +135,7 @@ class Manifold {
 			B.applyImpulse(impulse, rb);
 			scene.vec_ds(impulse);
 			scene.vec_ds(impulsn);
-			
+
 			// Friction impulse
 			// rv = B->velocity + Cross( B->angularVelocity, rb ) -
 			// A->velocity - Cross( A->angularVelocity, ra );

@@ -1,15 +1,14 @@
 package;
 
 import haxe.Timer;
-import flash.system.System;
 import flash.events.MouseEvent;
-import org.magnos.impulse.Vec2;
-import org.magnos.impulse.Circle;
-import org.magnos.impulse.Shape;
-import org.magnos.impulse.Polygon;
-import org.magnos.impulse.Body;
-import org.magnos.impulse.ImpulseMath;
-import org.magnos.impulse.ImpulseScene;
+import com.grantech.impulse.Vec2;
+import com.grantech.impulse.Circle;
+import com.grantech.impulse.Shape;
+import com.grantech.impulse.Polygon;
+import com.grantech.impulse.Body;
+import com.grantech.impulse.ImpulseMath;
+import com.grantech.impulse.ImpulseScene;
 import flash.events.Event;
 import flash.display.Sprite;
 
@@ -17,11 +16,11 @@ import flash.display.Sprite;
  * ...
  * @author Mansour Djawadi
  */
-class Main extends Sprite {
+class TestSimple extends Sprite {
 	static function main() {
 		flash.Lib.current.stage.align = flash.display.StageAlign.TOP_LEFT;
 		flash.Lib.current.stage.scaleMode = flash.display.StageScaleMode.NO_SCALE;
-		flash.Lib.current.addChild(new Main());
+		flash.Lib.current.addChild(new TestSimple());
 	}
 
 	private var inited:Bool;

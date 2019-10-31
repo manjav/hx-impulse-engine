@@ -21,7 +21,7 @@
 	Port to Haxe and added pooling by Mansour Djawadi http://github.com/manjav
  */
 
-package org.magnos.impulse;
+package com.grantech.impulse;
 
 class ImpulseScene {
 	public var dt:Float = 0;
@@ -72,8 +72,7 @@ class ImpulseScene {
 			integrateVelocity(bodies[i], dt);
 
 		// Correct positions
-		for (i in 0...contacts.length)
-		{
+		for (i in 0...contacts.length) {
 			contacts[i].positionalCorrection();
 			man_ds(contacts[i]);
 		}
@@ -91,7 +90,7 @@ class ImpulseScene {
 		bodies.push(b);
 		return b;
 	}
-	
+
 	public function remove(b:Body):Body {
 		bodies.remove(b);
 		return b;
@@ -148,14 +147,13 @@ class ImpulseScene {
 
 	var man_pool:Array<Manifold> = new Array();
 	var man_i:Int = 0;
-	public function man_ds(m:Manifold):Void
-	{
+
+	public function man_ds(m:Manifold):Void {
 		man_pool[man_i++] = m;
 	}
-	public function man_in(a:Body, b:Body):Manifold
-	{
-		if( man_i > 0 )
-		{
+
+	public function man_in(a:Body, b:Body):Manifold {
+		if (man_i > 0) {
 			man_i--;
 			man_pool[man_i].A = a;
 			man_pool[man_i].B = b;
@@ -166,27 +164,27 @@ class ImpulseScene {
 
 	var vec_pool:Array<Vec2> = new Array<Vec2>();
 	var vec_i:Int = 0;
-	public function vec_ds(v:Vec2):Void
-	{
+
+	public function vec_ds(v:Vec2):Void {
 		vec_pool[vec_i++] = v;
 	}
-	public function vec_in():Vec2
-	{
-		if( vec_i > 0 )
-			return vec_pool[--vec_i].set(0,0);
+
+	public function vec_in():Vec2 {
+		if (vec_i > 0)
+			return vec_pool[--vec_i].set(0, 0);
 		return new Vec2();
 	}
 
 	var mat_pool:Array<Mat2> = new Array();
 	var mat_i:Int = 0;
-	public function mat_ds(m:Mat2):Void
-	{
+
+	public function mat_ds(m:Mat2):Void {
 		mat_pool[mat_i++] = m;
 	}
-	public function mat_in():Mat2
-	{
-		if( mat_i > 0 )
-			return mat_pool[--mat_i].set(0,0,0,0);
+
+	public function mat_in():Mat2 {
+		if (mat_i > 0)
+			return mat_pool[--mat_i].set(0, 0, 0, 0);
 		return new Mat2();
 	}
 }

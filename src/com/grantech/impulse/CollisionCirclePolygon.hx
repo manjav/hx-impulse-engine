@@ -21,7 +21,7 @@
 	Port to Haxe and added pooling by Mansour Djawadi http://github.com/manjav
  */
 
-package org.magnos.impulse;
+package com.grantech.impulse;
 
 class CollisionCirclePolygon extends CollisionCallback {
 	static public var instance:CollisionCirclePolygon = new CollisionCirclePolygon();
@@ -47,7 +47,7 @@ class CollisionCirclePolygon extends CollisionCallback {
 		var faceNormal:Int = 0;
 		for (i in 0...B.vertexCount) {
 			// real s = Dot( B->m_normals[i], center - B->m_vertices[i] );
-			
+
 			var csb = center.sub(B.vertices[i], m.scene.vec_in());
 			var s:Float = Vec2.dotVV(B.normals[i], csb);
 			m.scene.vec_ds(csb);
