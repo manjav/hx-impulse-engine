@@ -5,5 +5,5 @@
 # --interp
 # -as3 bin\src
 # -D advanced-telemetry
--swf-header 600:800:60:ffffff
+-swf-header 600:800:60:0
 -swf bin/application.swf
