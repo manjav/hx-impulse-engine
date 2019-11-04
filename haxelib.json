@@ -6,8 +6,8 @@
   "main": "tests.Main",
   "tags": [ "physics", "cross", "flash", "cpp" , "java" , "web" , "game" , "php" , "neko" ],
   "description": "HAXE port of a simple, open source, 2D impulse based physics engine for non-view (server-side) use.",
-  "version": "1.0.1",
-  "releasenote": "Added Flash test sample, added pooling and far objects ignore",
+  "version": "1.1.0",
+  "releasenote": "Impulse enabled for push simulation of particles, Performance tips added.",
   "contributors": [ "manjav" ],
   "dependencies": {}
 }
