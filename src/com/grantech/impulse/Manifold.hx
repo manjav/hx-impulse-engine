@@ -60,8 +60,8 @@ class Manifold {
 			// Calculate radii from COM to contact
 			// ra:Vec = contacts[i] - A->position;
 			// rb:Vec = contacts[i] - B->position;
-			var ra:Vec2 = contacts[i].sub(A.position);
-			var rb:Vec2 = contacts[i].sub(B.position);
+			var ra:Vec2 = contacts[i].sub(A.position, scene.vec_in());
+			var rb:Vec2 = contacts[i].sub(B.position, scene.vec_in());
 
 			// rv:Vec = B->velocity + Cross( B->angularVelocity, rb ) -
 			// A->velocity - Cross( A->angularVelocity, ra );
@@ -69,6 +69,8 @@ class Manifold {
 			var crb = Vec2.crossFVV(B.angularVelocity, rb, scene.vec_in());
 			var bacrb = B.velocity.add(crb);
 			var rv:Vec2 = bacrb.subi(A.velocity).subi(cra);
+			scene.vec_ds(ra);
+			scene.vec_ds(rb);
 			scene.vec_ds(cra);
 			scene.vec_ds(crb);
 			scene.vec_ds(bacrb);

@@ -37,12 +37,12 @@ class ImpulseScene {
 
 	public function step() {
 		// Generate new collision info
-		contacts = new Array();
-		for (i in 0...bodies.length) {
-			var A:Body = bodies[i];
+		this.contacts = new Array();
+		for (i in 0...this.bodies.length) {
+			var A:Body = this.bodies[i];
 
-			for (j in i + 1...bodies.length) {
-				var B:Body = bodies[j];
+			for (j in i + 1...this.bodies.length) {
+				var B:Body = this.bodies[j];
 
 				if (A.invMass == 0 && B.invMass == 0)
 					continue;
@@ -51,17 +51,17 @@ class ImpulseScene {
 				m.solve();
 
 				if (m.contactCount > 0)
-					contacts.push(m);
+					this.contacts.push(m);
 			}
 		}
 
 		// Integrate forces
-		for (i in 0...bodies.length)
-			integrateForces(bodies[i], dt);
+		for (i in 0...this.bodies.length)
+			integrateForces(this.bodies[i], dt);
 
 		// Initialize collision
-		for (i in 0...contacts.length)
-			contacts[i].initialize();
+		for (i in 0...this.contacts.length)
+			this.contacts[i].initialize();
 
 		// Solve collisions
 		if( this.impulseEnabled )
@@ -70,18 +70,18 @@ class ImpulseScene {
 					this.contacts[i].applyImpulse();
 
 		// Integrate velocities
-		for (i in 0...bodies.length)
-			integrateVelocity(bodies[i], dt);
+		for (i in 0...this.bodies.length)
+			integrateVelocity(this.bodies[i], dt);
 
 		// Correct positions
-		for (i in 0...contacts.length) {
-			contacts[i].positionalCorrection();
-			man_ds(contacts[i]);
+		for (i in 0...this.contacts.length) {
+			this.contacts[i].positionalCorrection();
+			man_ds(this.contacts[i]);
 		}
 
 		// Clear all forces
-		for (i in 0...bodies.length) {
-			var b:Body = bodies[i];
+		for (i in 0...this.bodies.length) {
+			var b:Body = this.bodies[i];
 			b.force.set(0, 0);
 			b.torque = 0;
 		}
@@ -89,18 +89,18 @@ class ImpulseScene {
 
 	public function add(shape:Shape, x:Int, y:Int):Body {
 		var b:Body = new Body(shape, x, y);
-		bodies.push(b);
+		this.bodies.push(b);
 		return b;
 	}
 
 	public function remove(b:Body):Body {
-		bodies.remove(b);
+		this.bodies.remove(b);
 		return b;
 	}
 
 	public function clear() {
-		contacts = new Array();
-		bodies = new Array();
+		this.contacts = new Array();
+		this.bodies = new Array();
 	}
 
 	// Acceleration
