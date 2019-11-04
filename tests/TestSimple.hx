@@ -56,7 +56,7 @@ class TestSimple extends Sprite {
 			return;
 		this.inited = true;
 
-		this.impulse = new ImpulseScene(ImpulseMath.DT, 10);
+		this.impulse = new ImpulseScene(ImpulseMath.DT);
 
 		var b:Body = null;
 		b = impulse.add(new Circle(30.0), 300, 500);

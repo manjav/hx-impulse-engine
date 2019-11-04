@@ -25,13 +25,14 @@ package com.grantech.impulse;
 
 class ImpulseScene {
 	public var dt:Float = 0;
-	public var iterations:Int;
+	public var iterations:Int = 10;
+	public var impulseEnabled:Bool;
 	public var bodies:Array<Body> = new Array<Body>();
 	public var contacts:Array<Manifold> = new Array<Manifold>();
 
-	public function new(dt:Float, iterations:Int) {
+	public function new(dt:Float, impulseEnabled:Bool = true) {
 		this.dt = dt;
-		this.iterations = iterations;
+		this.impulseEnabled = impulseEnabled;
 	}
 
 	public function step() {
@@ -63,9 +64,10 @@ class ImpulseScene {
 			contacts[i].initialize();
 
 		// Solve collisions
-		for (j in 0...iterations)
-			for (i in 0...contacts.length)
-				contacts[i].applyImpulse();
+		if( this.impulseEnabled )
+			for (j in 0...this.iterations)
+				for (i in 0...this.contacts.length)
+					this.contacts[i].applyImpulse();
 
 		// Integrate velocities
 		for (i in 0...bodies.length)
