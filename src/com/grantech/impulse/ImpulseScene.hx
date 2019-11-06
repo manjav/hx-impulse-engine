@@ -25,7 +25,7 @@ package com.grantech.impulse;
 
 class ImpulseScene {
 	public var dt:Float = 0;
-	public var iterations:Int = 10;
+	public var iterations:Int = 1;
 	public var impulseEnabled:Bool;
 	public var bodies:Array<Body> = new Array<Body>();
 	public var contacts:Array<Manifold> = new Array<Manifold>();
@@ -38,10 +38,10 @@ class ImpulseScene {
 	public function step() {
 		// Generate new collision info
 		this.contacts = new Array();
-		for (i in 0...this.bodies.length) {
+		var len = this.bodies.length;
+		for (i in 0...len) {
 			var A:Body = this.bodies[i];
-
-			for (j in i + 1...this.bodies.length) {
+			for (j in i + 1...len) {
 				var B:Body = this.bodies[j];
 
 				if (A.invMass == 0 && B.invMass == 0)
@@ -52,11 +52,12 @@ class ImpulseScene {
 
 				if (m.contactCount > 0)
 					this.contacts.push(m);
+				else
+					man_ds(m);
 			}
 		}
-
 		// Integrate forces
-		for (i in 0...this.bodies.length)
+		for (i in 0...len)
 			integrateForces(this.bodies[i], dt);
 
 		// Initialize collision
@@ -70,7 +71,7 @@ class ImpulseScene {
 					this.contacts[i].applyImpulse();
 
 		// Integrate velocities
-		for (i in 0...this.bodies.length)
+		for (i in 0...len)
 			integrateVelocity(this.bodies[i], dt);
 
 		// Correct positions
@@ -80,7 +81,7 @@ class ImpulseScene {
 		}
 
 		// Clear all forces
-		for (i in 0...this.bodies.length) {
+		for (i in 0...len) {
 			var b:Body = this.bodies[i];
 			b.force.set(0, 0);
 			b.torque = 0;
