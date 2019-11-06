@@ -32,8 +32,8 @@ class Manifold {
 	public var contacts:Array<Vec2> = [new Vec2(), new Vec2()];
 	public var contactCount:Int;
 	public var e:Float = 0;
-	public var df:Float = 0;
-	public var sf:Float = 0;
+	private var dynamicFrictions:Float = 0;
+	private var staticFrictions:Float = 0;
 
 	public function new(a:Body, b:Body, scene:ImpulseScene) {
 		A = a;
@@ -53,8 +53,8 @@ class Manifold {
 		// Calculate static and dynamic friction
 		// sf = std::sqrt( A->staticFriction * A->staticFriction );
 		// df = std::sqrt( A->dynamicFriction * A->dynamicFriction );
-		sf = Math.sqrt(A.staticFriction * A.staticFriction + B.staticFriction * B.staticFriction);
-		df = Math.sqrt(A.dynamicFriction * A.dynamicFriction + B.dynamicFriction * B.dynamicFriction);
+		staticFrictions = Math.sqrt(A.staticFriction * A.staticFriction + B.staticFriction * B.staticFriction);
+		dynamicFrictions = Math.sqrt(A.dynamicFriction * A.dynamicFriction + B.dynamicFriction * B.dynamicFriction);
 
 		for (i in 0...contactCount) {
 			// Calculate radii from COM to contact
@@ -167,12 +167,12 @@ class Manifold {
 			// Coulumb's law
 			var tangentImpulse:Vec2;
 			// if(std::abs( jt ) < j * sf)
-			if (Math.abs(jt) < j * sf) {
+			if (Math.abs(jt) < j * staticFrictions) {
 				// tangentImpulse = t * jt;
 				tangentImpulse = t.mulF(jt, scene.vec_in());
 			} else {
 				// tangentImpulse = t * -j * df;
-				tangentImpulse = t.mulF(j, scene.vec_in()).muliF(-df);
+				tangentImpulse = t.mulF(j, scene.vec_in()).muliF(-dynamicFrictions);
 			}
 
 			var tangentImpulsn = tangentImpulse.neg(scene.vec_in());
